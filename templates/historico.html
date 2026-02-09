@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Histórico</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr><th>Nome</th><th>OAB</th><th>Foto</th><th>Data</th></tr>
+    </thead>
+    <tbody>
+        {% for c in cards %}
+        <tr>
+            <td>{{ c.nome }}</td>
+            <td>{{ c.oab_numero }}</td>
+            <td><img src="{{ url_for('static', filename='uploads/' ~ c.foto) }}" width="80"></td>
+            <td>{{ c.data.strftime('%d/%m/%Y %H:%M') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gerar Carteirinha</h2>
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Nome</label>
+        <input type="text" name="nome" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Número OAB</label>
+        <input type="text" name="oab" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Foto</label>
+        <input type="file" name="foto" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Gerar</button>
+</form>
+{% endblock %}
