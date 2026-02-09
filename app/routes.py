@@ -1,7 +1,7 @@
+
 from flask import Blueprint, render_template, request, redirect
+from .services import processar_carteirinha
 from .models import Carteirinha
-from .database import db
-from .services import gerar_carteirinha
 
 main = Blueprint("main", __name__)
 
@@ -12,14 +12,11 @@ def index():
 @main.route("/gerar", methods=["GET", "POST"])
 def gerar():
     if request.method == "POST":
-        nome = request.form["nome"]
-        oab = request.form["oab"]
-        foto = request.files["foto"]
-        gerar_carteirinha(nome, oab, foto)
+        processar_carteirinha(request.form, request.files.get("foto"))
         return redirect("/historico")
     return render_template("gerar.html")
 
 @main.route("/historico")
 def historico():
-    cards = Carteirinha.query.order_by(Carteirinha.data.desc()).all()
+    cards = Carteirinha.query.all()
     return render_template("historico.html", cards=cards)
